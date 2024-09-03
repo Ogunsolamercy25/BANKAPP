@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGN IN</title>
+</head>
+<body style="background: linear-gradient(rgb(112, 112, 133), rgb(34, 26, 26)); background-repeat: no-repeat; height: 100vh;">
+    <h1 style="margin-right: 20px; color: white;">T-FUNDS</h1>
+        <hr>
+    <center>
+        <section  style=" padding: 50px;background-color: aliceblue; width: 400px; border-radius: 25px;">
+            <form>
+                <input type="email" placeholder="Email" id="emailAddress" style="padding: 15px; width: 350px;border-radius: 15px;"><br><br>
+                <input type="password" placeholder="password" style="padding: 15px; width: 350px;border-radius: 15px;" id="passWord">
+            </form>
+            <button  style="margin-top: 40px; border-radius: 10px; padding: 10px; background-color: rgb(34, 34, 58); color: white;" onclick="logIn()">ENTER</button>
+        </section>
+    </center>
+</body>
+<script>
+    
+    function logIn() {
+
+var userObj = {
+    email: emailAddress.value,
+    password: passWord.value,
+
+}
+console.log(userObj)
+
+
+var allUsers = JSON.parse(localStorage.getItem('users'))
+var found = allUsers.find(user => user.mail == emailAddress.value)
+console.log(allUsers)
+console.log(found)
+if (found) {
+    if (found.password == passWord.value) {
+        localStorage.setItem('currentUser', JSON.stringify(found))
+        console.log("Logged in")
+        location.href = './dashboard.html'
+    } else {
+        alert("invalid password")
+    }
+} else {
+    alert("No account found")
+    // location.href = './index.html'
+}
+}
+</script>
+</html>

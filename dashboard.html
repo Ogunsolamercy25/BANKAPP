@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCOUNT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background: linear-gradient(rgb(112, 112, 133), rgb(34, 26, 26)); background-repeat: no-repeat; height: 100vh;">
+    <div>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <h3 style="margin: 10px; color: white;">T-FUNDS</h3>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="signin.html">Signin</a>
+                        </li>
+    
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="logOut()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <hr>
+    <div style="background-color: rgb(218, 231, 241); padding: 100px; color: black; border-radius: 20px 20px 0 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h2 class="mb-4" id="welcomeUser"></h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <h5>Account Balance</h5>
+                                <p id="userBalance"></p>
+                            </div>
+                            <div class="col-md-6 mb-3 text-end">
+                                <h5>Account Number</h5>
+                                <p id="userNumber"></p>
+                            </div>
+                        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h5>Email</h5>
+                <p id="userEmail">user@example.com</p>
+            </div>
+            <div class="col-md-6 mb-3 text-end">
+                <h5>Last Login</h5>
+                <p id="loginDate">August 26, 2024</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <span class="transfer-icon">
+                <i class="bi bi-arrow-right-circle"></i> <a href="./transfer.html">Transfer Funds</a>
+            </span>
+        </div>
+
+    </div>
+</body>
+<script>
+    if (localStorage.currentUser) {
+        
+    }else{
+        location.href = './signin.html'
+    }
+    var theDate = new Date()
+    console.log(theDate);
+
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    console.log(currentUser)
+    userBalance.innerHTML = currentUser.accountBalance
+    userNumber.innerHTML = currentUser.accountNumber
+    welcomeUser.innerHTML = `Welcome, ${currentUser.name}.`
+    userEmail.innerHTML = currentUser.mail
+    loginDate.innerHTML = theDate
+
+
+    function logOut() {
+        console.log("I am logging out")
+        localStorage.removeItem('currentUser')
+        location.href = './signin.html'
+    }
+</script>
+</html>

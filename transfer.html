@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background: linear-gradient(rgb(112, 112, 133), rgb(34, 26, 26)); background-repeat: no-repeat; height: 100vh;">
+    <center>
+        <div>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <h3 style="margin: 10px; color: white;">T-FUNDS</h3>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="signin.html">Signin</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <hr>
+
+            <div >
+            <form style=" color: white; font-family: sans-serif; ;">
+                <div>
+                    <option value="1" id="accountDetails">1234567890 - $10,000.00</option>
+                </div><br>
+                <p>TO</p>
+                <input type="number" placeholder="Beneficiary's accountNumber" oninput="checks()" id="recipientNo" style="padding: 9px; width: 350px;border-radius: 15px;"><br>
+
+                <!-- <p>BENEFICIARY'S NAME</p>
+                <input type="text" disabled style="padding: 15px; width: 350px;border-radius: 15px;" id="recipient"> -->
+                <p>AMOUNT</p>
+                <input type="number" placeholder="Amount to transfer" id="amount" style="padding: 9px; width: 350px;border-radius: 15px;">
+                <p>NOTE</p>
+                <input type="text" placeholder="Description" id="description" style="padding: 9px; width: 350px;border-radius: 15px;">
+            </form><br>
+            <button onclick="transfer()" id="sendBtn"
+                style="padding: 15px; border-radius: 17px; color: white; background-color: rgb(34, 34, 58);" type="button">TRANSFER</button>
+        </div>
+    </div>
+    </center>
+</body>
+<script>
+    // if (localStorage.currentUser) {
+
+    // }else{
+    //     location.href = './signin.html'
+    // }
+    // var currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    // console.log(currentUser)
+
+    // sendBtn.disabled = false
+
+    if (localStorage.currentUser) {
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'))
+        console.log(currentUser)
+        accountDetails.innerHTML = `${currentUser.name} - ${currentUser.accountBalance}`
+        
+
+    } else {
+        location.href = "./signin.html";
+    }
+    function transfer() {
+        alert("Transfer Successful")
+        console.log(recipientNo.value)
+        var amountt = Number(amount.value);
+        var accountNo = Number(recipientNo.value);
+        (currentUser.accountBalance).innerText = currentUser.accountBalance = currentUser.accountBalance - amountt
+        console.log(currentUser)
+        localStorage.setItem('currentUser', JSON.stringify(currentUser))
+        
+
+    }
+
+    function checks() {
+        // console.log(recipientNo.length)
+        if (recipientNo.value.length == 10) {
+            // sendBtn.disabled = false
+            var allUsers = JSON.parse(localStorage.getItem('userDetails'))
+            console.log(allUsers)
+
+            var find = allUsers.find(user => user.accountNumber == recipientNo.value)
+
+            if (find) {
+                recipient.value = find.name
+                // console.log(find)
+
+            }
+            else {
+                recipient.value = "Account Number not found"
+                // recipient.value = ""
+                recipientNo.value = ""
+            }
+
+        }
+
+        else {
+            // sendBtn.disabled = true
+        }
+    }
+
+
+</script>
+
+</html>
